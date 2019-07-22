@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nelioalves.mc.domain.Categoria;
 import com.nelioalves.mc.repositories.CategoriaRepository;
+import com.nelioalves.mc.services.exceptions.ObjectNotFoundException;
 
 /**
  * Classe de serviços da entidade categoria que acessam os métodos da minha
@@ -29,7 +30,7 @@ public class CategoriaService {
 	 */
 	public Categoria buscar(Integer Id) {
 		Optional<Categoria> categoria = categoriaRepository.findById(Id);
-		return categoria.orElse(null);
+		return categoria.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + Id + ", Tipo: " + Categoria.class.getName()));
 	}
 
 }
