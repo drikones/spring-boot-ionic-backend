@@ -1,4 +1,4 @@
-package com.nelioalves.mc.resources.exceptions;
+ package com.nelioalves.mc.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 
