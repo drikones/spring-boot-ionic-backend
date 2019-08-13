@@ -1,5 +1,11 @@
 package com.nelioalves.mc.domain.enuns;
 
+/**
+ * Enum que identifica se cliente irá possuir CPF ou CNPJ
+ * 
+ * @author Adriano Rocha
+ * @since 27/07/2019
+ */
 public enum TipoCliente {
 	
 	PESSOAFISICA(1, "Pessoa Física"),
