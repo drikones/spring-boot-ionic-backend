@@ -13,6 +13,7 @@ import com.nelioalves.mc.domain.Cidade;
 import com.nelioalves.mc.domain.Cliente;
 import com.nelioalves.mc.domain.Endereco;
 import com.nelioalves.mc.domain.Estado;
+import com.nelioalves.mc.domain.ItemPedido;
 import com.nelioalves.mc.domain.Pagamento;
 import com.nelioalves.mc.domain.PagamentoComBoleto;
 import com.nelioalves.mc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.nelioalves.mc.repositories.CidadeRepository;
 import com.nelioalves.mc.repositories.ClienteRepository;
 import com.nelioalves.mc.repositories.EnderecoRepository;
 import com.nelioalves.mc.repositories.EstadoRepository;
+import com.nelioalves.mc.repositories.ItemPedidoRepository;
 import com.nelioalves.mc.repositories.PagamentoRepository;
 import com.nelioalves.mc.repositories.PedidoRepository;
 import com.nelioalves.mc.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class CursomcApplication implements CommandLineRunner {
 	@Autowired
 	private PagamentoRepository repoPagamento;
 	
+	@Autowired
+	private ItemPedidoRepository repoItemPedido;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
@@ -78,7 +83,7 @@ public class CursomcApplication implements CommandLineRunner {
 		p3.setCategorias(Arrays.asList(cat1));
 		
 		repoCategoria.saveAll(Arrays.asList(cat1,cat2));
-		repoProduto.saveAll(Arrays.asList(p1,p2,p3));
+		
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
@@ -111,12 +116,27 @@ public class CursomcApplication implements CommandLineRunner {
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
   		ped2.setPagamento(pagto2);
   		
+  		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+  		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
   		cli1.setPedidos(Arrays.asList(ped1,ped2));
   		
   		repoCliente.saveAll(Arrays.asList(cli1));
 		repoEndereco.saveAll(Arrays.asList(e1,e2));
 		repoPedido.saveAll(Arrays.asList(ped1,ped2));
+		repoProduto.saveAll(Arrays.asList(p1,p2,p3));
+		repoItemPedido.saveAll(Arrays.asList(ip1,ip2,ip3));
 		repoPagamento.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		
 	}
 	
 	

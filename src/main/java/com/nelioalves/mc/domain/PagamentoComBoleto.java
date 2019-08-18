@@ -3,6 +3,8 @@ package com.nelioalves.mc.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.nelioalves.mc.domain.enuns.EstadoPagamento;
 
@@ -15,7 +17,11 @@ import com.nelioalves.mc.domain.enuns.EstadoPagamento;
 public class PagamentoComBoleto extends Pagamento{
 	
 	private static final long serialVersionUID = 6680594056387384147L;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataPagamento;
 	
 	public PagamentoComBoleto() {}

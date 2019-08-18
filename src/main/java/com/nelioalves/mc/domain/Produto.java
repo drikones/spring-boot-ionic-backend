@@ -2,7 +2,10 @@ package com.nelioalves.mc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
@@ -29,6 +34,10 @@ public class Produto implements Serializable{
 	private Integer id;
 	private String nome;
 	private Double preco;
+	
+	@OneToMany(mappedBy="id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();
+
 	
 	@JsonBackReference
 	@ManyToMany
@@ -55,7 +64,7 @@ public class Produto implements Serializable{
 		this.nome = nome;
 		this.preco = preco;
 	}
-
+	
 	/**
 	 * Retorna o id
 	 * @return id
@@ -114,6 +123,35 @@ public class Produto implements Serializable{
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
+	
+	/**
+	 * Retorna os itens do produto
+	 * @return itens
+	 */
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	/**
+	 * Informa os itens do produto
+	 * @param itens
+	 */
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
+	
+	/**
+	 * Retorna a lista de pedidos associados aquele produto
+	 * @return lista
+	 */
+	public List<Pedido> getPedidos(){
+		List<Pedido> lista = new ArrayList<>();
+		for(ItemPedido x: itens)
+		{
+			lista.add(x.getPedido());
+		}
+		return lista;	
+	}
 
 	@Override
 	public int hashCode() {
@@ -139,7 +177,4 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	 
-
 }
