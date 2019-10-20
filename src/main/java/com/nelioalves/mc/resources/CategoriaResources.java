@@ -25,7 +25,6 @@ import com.nelioalves.mc.services.CategoriaService;
 @RequestMapping(value = "/categorias")
 public class CategoriaResources {
 	
-	
 	@Autowired
 	private CategoriaService categoriaService;
 
