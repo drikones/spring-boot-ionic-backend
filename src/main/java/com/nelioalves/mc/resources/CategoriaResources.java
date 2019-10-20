@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,5 +76,20 @@ public class CategoriaResources {
     	categoria = categoriaService.update(categoria);
     	return ResponseEntity.noContent().build();
     }
+	
+	/**
+	 * Método responsável por fazer uma requisição HTTP delete para deletar uma Categoria
+	 * 
+	 * @param id
+	 * @return
+	 * 
+	 * @author Adriano Rocha
+	 * @since 20/10/2019
+	 */
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		categoriaService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 	
 }

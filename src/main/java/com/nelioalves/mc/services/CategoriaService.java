@@ -3,10 +3,12 @@ package com.nelioalves.mc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.nelioalves.mc.domain.Categoria;
 import com.nelioalves.mc.repositories.CategoriaRepository;
+import com.nelioalves.mc.services.exceptions.DataIntegrityException;
 import com.nelioalves.mc.services.exceptions.ObjectNotFoundException;
 
 /**
@@ -54,5 +56,24 @@ public class CategoriaService {
 		return categoriaRepository.save(categoria);
 	}
 	
-	
+	/**
+	 * Deleta uma categoria pelo seu id
+	 * 
+	 * @param id
+	 * 
+	 */
+	public  void delete(Integer id) {
+		Categoria categoria = find(id);
+		if(categoria != null)
+		{
+			try
+			{
+				categoriaRepository.delete(categoria);
+			}
+			catch(DataIntegrityViolationException ex) 
+			{
+				throw new DataIntegrityException("Não é possível excluir uma categoria que possua produtos!");
+			}
+		}	
+	}
 }
