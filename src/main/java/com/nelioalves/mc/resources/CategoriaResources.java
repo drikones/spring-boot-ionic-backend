@@ -1,6 +1,8 @@
 package com.nelioalves.mc.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nelioalves.mc.domain.Categoria;
+import com.nelioalves.mc.dto.CategoriaDTO;
 import com.nelioalves.mc.services.CategoriaService;
 
 /**
@@ -90,6 +93,22 @@ public class CategoriaResources {
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		categoriaService.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	/**
+	 * Método responsável por listar todas as categorias
+	 * 
+	 * @return
+	 * 
+	 * @author Adriano Rocha
+	 * @since 26/10/2019
+	 * 
+	 */
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> findAll(){
+		List<Categoria> list = categoriaService.findAll();
+		List<CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 }
