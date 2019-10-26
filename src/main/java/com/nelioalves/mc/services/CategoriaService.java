@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.nelioalves.mc.domain.Categoria;
+import com.nelioalves.mc.dto.CategoriaDTO;
 import com.nelioalves.mc.repositories.CategoriaRepository;
 import com.nelioalves.mc.services.exceptions.DataIntegrityException;
 import com.nelioalves.mc.services.exceptions.ObjectNotFoundException;
@@ -101,5 +102,15 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page,Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
+	}
+	
+	/**
+	 * Retorna uma categoria a partir do seu DTO
+	 * 
+	 * @param categoriaDTO
+	 * @return new Categoria(id, nome)
+	 */
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());	
 	}
 }
