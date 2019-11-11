@@ -1,5 +1,11 @@
 package com.nelioalves.mc.services.validation.utils;
 
+/**
+ * Classe utilitária que faz cálculos para validação de cpf e cnpj
+ * 
+ * @author Adriano Rocha/Nelio Alves/Adriano Luis
+ * @since 10/11/2019
+ */
 // Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
 public class BR {
 	// CPF
