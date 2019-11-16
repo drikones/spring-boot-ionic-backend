@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.nelioalves.mc.domain.Cliente;
+import com.nelioalves.mc.services.validation.ClienteUpdate;
 
 /**
  * Classe de DTO que vai retornar apenas as informações de Cliente 
@@ -16,6 +17,7 @@ import com.nelioalves.mc.domain.Cliente;
  * @author Adriano Rocha
  * @since 28/10/2019
  */
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 
 	private static final long serialVersionUID = -6039685599854941050L;
