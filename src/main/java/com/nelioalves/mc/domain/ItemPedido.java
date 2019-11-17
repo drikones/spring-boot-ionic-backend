@@ -106,12 +106,28 @@ public class ItemPedido implements Serializable {
 	}
 	
 	/**
+	 * Define um pedido associado ao item de pedido
+	 * @param pedido
+	 */
+	public void setPedido(Pedido pedido) {
+		this.id.setPedido(pedido);
+	}
+	
+	/**
 	 * Retorna o pedido associado ao item
 	 * @return id
 	 */
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
+	}
+	
+	/**
+	 * Define um produto associado ao item de pedido
+	 * @param produto
+	 */
+	public void setProduto(Produto produto) {
+		this.id.setProduto(produto);
 	}
 	
 	/**

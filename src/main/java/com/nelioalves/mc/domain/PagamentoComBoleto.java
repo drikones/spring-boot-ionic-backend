@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.nelioalves.mc.domain.enuns.EstadoPagamento;
 
 /**
@@ -14,6 +15,7 @@ import com.nelioalves.mc.domain.enuns.EstadoPagamento;
  *
  */
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento{
 	
 	private static final long serialVersionUID = 6680594056387384147L;
