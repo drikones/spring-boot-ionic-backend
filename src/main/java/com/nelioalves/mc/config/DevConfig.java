@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.nelioalves.mc.services.DBService;
+import com.nelioalves.mc.services.EmailService;
+import com.nelioalves.mc.services.SmtpEmailService;
 
 /**
  *  Classe de configuração para o profile de testes
@@ -35,6 +37,11 @@ public class DevConfig {
 			return false;
 		}
 		
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new SmtpEmailService();
 	}
 
 }
