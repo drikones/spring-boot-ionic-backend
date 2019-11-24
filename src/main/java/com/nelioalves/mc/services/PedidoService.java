@@ -45,6 +45,9 @@ public class PedidoService {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	/**
 	 * Retorna um pedido pelo seu id
 	 * 
@@ -76,7 +79,7 @@ public class PedidoService {
 			ip.setPedido(pedido);
 		}
 		itemPedidoRepository.saveAll(pedido.getItens());
-		System.err.println(pedido);
+		emailService.sendOrderConfirmationEmail(pedido);
 		return pedido;
 	}
 
