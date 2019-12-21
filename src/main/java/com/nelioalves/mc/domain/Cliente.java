@@ -41,6 +41,8 @@ public class Cliente  implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@JsonIgnore
+	private String senha;
 	
 	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -59,21 +61,23 @@ public class Cliente  implements Serializable{
 	public Cliente() {}
 	
 	/**
-	 * Construtor com parâmetros
+	 * Construtor  de Cliente com parâmetros
 	 * 
 	 * @param id
 	 * @param nome
 	 * @param email
 	 * @param cpfOuCnpj
 	 * @param tipo
+	 * @param senha
 	 */
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = (tipo==null)? null : tipo.getCod();
+		this.senha = senha;
 	}
 
 
@@ -155,6 +159,22 @@ public class Cliente  implements Serializable{
 	 */
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+	
+	/**
+	 * Retorna a senha do cliente
+	 * @return senha
+	 */
+	public String getSenha() {
+		return senha;
+	}
+
+	/**
+	 * Configura a senha do cliente
+	 * @param senha
+	 */
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	/**
