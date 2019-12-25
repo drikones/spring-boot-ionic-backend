@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nelioalves.mc.domain.Cidade;
 import com.nelioalves.mc.domain.Cliente;
 import com.nelioalves.mc.domain.Endereco;
+import com.nelioalves.mc.domain.enuns.Perfil;
 import com.nelioalves.mc.domain.enuns.TipoCliente;
 import com.nelioalves.mc.dto.ClienteDTO;
 import com.nelioalves.mc.dto.ClienteNewDTO;
 import com.nelioalves.mc.repositories.ClienteRepository;
 import com.nelioalves.mc.repositories.EnderecoRepository;
+import com.nelioalves.mc.security.UserSS;
+import com.nelioalves.mc.services.exceptions.AuthorizationException;
 import com.nelioalves.mc.services.exceptions.DataIntegrityException;
 import com.nelioalves.mc.services.exceptions.ObjectNotFoundException;
 
@@ -49,6 +52,10 @@ public class ClienteService {
 	 * @return cliente
 	 */
 	public Cliente find(Integer Id) {
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !Id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		Optional<Cliente> cliente = clienteRepository.findById(Id);
 		return cliente.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado! Id: " + Id + ", Tipo: " + Cliente.class.getName()));
 	}
