@@ -19,6 +19,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nelioalves.mc.dto.CredenciaisDTO;
 
+/**
+ *  Classe responsável por ser o filtro da operação de autenticação do usuário
+ * @author Adriano Rocha
+ * @since 22/12/2019
+ */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 	private AuthenticationManager authenticationManager;
@@ -59,7 +64,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = jwtUtil.generateToken(username);
         res.addHeader("Authorization", "Bearer " + token);
 	}
-
+	
+	/**
+	 * Classe responsável por tratar erro de autenticação
+	 * @author Adriano Rocha
+	 * @since 22/12/2019
+	 */
 	private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
         @Override
