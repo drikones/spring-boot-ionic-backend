@@ -63,6 +63,8 @@ public class Cliente  implements Serializable{
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
+	private String imageUrl;
+	
 	/**
 	 * Construtor  de cliente sem parâmetros
 	 */
@@ -251,6 +253,22 @@ public class Cliente  implements Serializable{
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+	
+	/**
+	 * Retorna a url da imagem
+	 * @return imageUrl
+	 */
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	/**
+	 * Seta a url da imagem
+	 * @param imageUrl
+	 */
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
 
 	@Override
@@ -277,4 +295,6 @@ public class Cliente  implements Serializable{
 			return false;
 		return true;
 	}
+
+
 }
