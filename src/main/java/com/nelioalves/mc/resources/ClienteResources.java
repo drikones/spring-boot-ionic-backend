@@ -52,6 +52,12 @@ public class ClienteResources {
 		return ResponseEntity.ok().body(cliente);
 	}
 	
+	@GetMapping(value="/email")
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email) {
+		Cliente cliente = clienteService.findByEmail(email);
+		return ResponseEntity.ok().body(cliente);
+	}
+	
 	/**
 	 * Insere um novo cliente
 	 * 
